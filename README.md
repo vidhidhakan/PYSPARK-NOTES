@@ -71,5 +71,37 @@ emp_df = emp_final.select(
     (col('age')*2) 
 ) 
 
+CHAPTER 3 (PART 2 TRANSFORMATION)
+# Adding a new column 
 
+from pyspark.sql import SparkSession 
+from pyspark.sql.functions import lit 
+emp_final = emp_final.withColumn("new_column", lit(100)) 
+
+# Droping columns 
+emp_df = emp_final.drop("new_column") 
+Emp_df.show() 
+
+# Rename columns 
+emp_final = emp_final.withColumnRenamed("newcolumn", "mycolumn") 
+emp_final.show() 
+
+# Using where and limit 
+df1 = emp_final.select("employee_id","name","age").where("salary > 4000") 
+df1.show() 
+
+df1 = emp_final.select("employee_id","name","age").where("salary>4000").limit(1) 
+df1.show() 
+
+# TO CHANGE SALARY FROM INT TO DOUBLE TYPE 
+
+from pyspark.sql.functions import col 
+from pyspark.sql.types import DoubleType 
+
+emp_df = emp_final.select("name", "age", "salary") \ 
+    .withColumn("age", col("age").cast(DoubleType())) \ 
+    .withColumn("salary", col("salary").cast(DoubleType())) 
+emp_df.show() 
+
+ 
 
