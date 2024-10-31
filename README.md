@@ -39,6 +39,37 @@ emp_final.write.csv("data/output/1/emp.csv",header=True)
 emp_final.printschema()
 schema_info = emp_final.schema() / print(schema_info)
 
+CHP - 2(TRANSFORMATION PART 1)
+
+# If i want to use integertype() /stringtype() - i can do by calling structure field/type 
+from pyspark.sql.types import StructField,StructType,StringType,IntegerType 
+
+emp_df= StructType([ 
+    StructField("name",StringType(),True), 
+    StructField("age", IntegerType(),True) 
+]) 
+
+ 
+# Change emp_id to employee_id 
+emp_df = emp_final.withColumnRenamed("empid", "employee_id") 
+
+# Change age from string to integer 
+from pyspark.sql.functions import col 
+from pyspark.sql.types import IntegerType 
+
+emp_df = emp_final.withColumn("age", col("age").cast(IntegerType())) 
+
+# Single changes  
+from pyspark.sql.functions import col 
+emp_df = emp_final.withColumn("salary",col("salary")*1.1) 
+
+# Multiple changes  
+from pyspark.sql.functions import col 
+emp_df = emp_final.select( 
+    col("name"), 
+    (col("salary")+500), 
+    (col('age')*2) 
+) 
 
 
 
