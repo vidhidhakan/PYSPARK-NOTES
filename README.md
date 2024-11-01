@@ -154,5 +154,59 @@ emp_df = emp_final.withColumn("newgender",emp_final["newgender"])
 
 emp_df = emp_final.drop("name","gender").withColumnRenamed("name","newname").withColumnRenamed("gender","newgender")
 
+CHAPTER 5 (TRANSFORMATION 2)
+
+# UNION
+emp_df = emp_df_1.union(emp_df_2)
+emp_df.show()
+
+# SORTING
+  emp_df = emp.orderBy(col('salary')).desc()
+  emp_df.show()
+
+# AGG
+   emp_df = emp.orderBy(col('salary')).agg(count("salary")).alias("totalsalary").desc()
+   emp_df = emp.orderBy(col('salary')).agg(max("salary")).alias("maxsalary")
+   emp_df = emp.orderBy(col('salary')).agg(min('salary')).alias("minsalary")
+
+   emp_df = emp.groupBy(col("name")).agg(sum('salary')).alias("totalsalary")
+
+# DISTINCTS
+     emp_distinct = emp_df.select("name").distinct()
+     emp_distinct.show()
+
+# WINDOWS
+ # lead,lag,rank,denserank,rownumber / agg(max/min/avg/sum/count)
+
+ from pyspark.sql.functions import rownumber
+ from pyspark.sql.window import Window
+
+ window_spec = Window.partitionBy(col("department_id")).orderBy(col("salary").desc())
+ max_func = max(col("salary")).over(window_spec)
+ emp_1 = emp.withColumn("maxsalary",max_func)
+ emp_1.show()
+ 
+--------------------------------------
+# rownum/denserank/rank/lead/lag
+
+from pyspark.sql.functions import desc,col, row_number
+from pyspark.sql.window import Window
+
+window_spec = Window.partitionBy(col("department_id").orderBy(col('salary').desc())
+emp_1 = emp.withcolumn("rn",row_number().over(window_func)).where("rn = 2")
+
+emp_1 = emp.withColumn("lead",lead('salary',1).over(window_func))
+emp_1 = emp.withColumn("lag",lag('salary',1).over(window_func))
+
+emp_1 = emp.withColumn('denserank',denserank().over(window_func))
+emp_1 = emp.withColumn('rank',rank().over(window_func))
+
+ 
+ 
+
+
+
+
+
 
 
