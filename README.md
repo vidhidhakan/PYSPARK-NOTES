@@ -103,5 +103,56 @@ emp_df = emp_final.select("name", "age", "salary") \
     .withColumn("salary", col("salary").cast(DoubleType())) 
 emp_df.show() 
 
- 
+CHAPTER 4 (PART 2 TRANSFORMATION)
+
+# CASE
+from pyspark.sql.functions import col, when
+
+emp_df = emp_final.select("employee_id",
+                           "name",
+                           "salary",
+                           "gender",
+                           col(("gender") when "gender" == "M","m"),
+                           col(("gender") when "gender" == "F", "f")
+                           otherwise("None").alias("newgender")
+                           
+# REGEXREPLACE
+from pyspark.sql.functions import regex_replace
+
+emp_df = emp_final.withcolumn("name",regex_replace("name","N","J"))
+
+# CONVERT DATE STRING INTO DATE FORMAT
+
+from pyspark.sql.types import dataType
+from pyspark.sql.functions import col
+
+emp_df = emp_final.withcolumn("hiredate",col("hiredate").cast(dataType()))
+
+
+# ADD CURRENT DATE/CURRENT TIMESTAMP
+
+from pyspark.sql.functions import current_timestamp, current_date
+
+emp_df = emp_final.withcolumn("Currentdate",current_date()) \
+           .withcolumn("currenttimestamp", Current_timestamp())
+
+
+# REMOVE NULL VALUES
+
+emp_df = emp_final.dropna()
+emp_df.show()
+
+# FILL NULL VALUES
+
+emp_df = emp_final.fillna(0)
+emp_df.show()
+
+# DROP OLD COLUMNS WITH NEW COLUMNS
+
+emp_df = emp_final.withColumn("newname",emp_final["name"])
+emp_df = emp_final.withColumn("newgender",emp_final["newgender"])
+
+emp_df = emp_final.drop("name","gender").withColumnRenamed("name","newname").withColumnRenamed("gender","newgender")
+
+
 
