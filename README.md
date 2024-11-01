@@ -176,16 +176,16 @@ emp_df.show()
      emp_distinct.show()
 
 # WINDOWS
- # lead,lag,rank,denserank,rownumber / agg(max/min/avg/sum/count)
+ # agg(max/min/avg/sum/count)
 
- from pyspark.sql.functions import rownumber
- from pyspark.sql.window import Window
+ from pyspark.sql.functions import col, min, desc
+from pyspark.sql.window import Window
 
- window_spec = Window.partitionBy(col("department_id")).orderBy(col("salary").desc())
- max_func = max(col("salary")).over(window_spec)
- emp_1 = emp.withColumn("maxsalary",max_func)
- emp_1.show()
- 
+emp_sorted = Window.partitionBy(col("department_id")).orderBy(col("salary"))
+
+emp_3 = emp.withColumn("minsalary", min(col("salary")).over(emp_sorted))
+emp_3.show()
+
 --------------------------------------
 # rownum/denserank/rank/lead/lag
 
