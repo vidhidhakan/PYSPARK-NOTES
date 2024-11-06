@@ -186,6 +186,7 @@ emp_sorted = Window.partitionBy(col("department_id")).orderBy(col("salary"))
 emp_3 = emp.withColumn("minsalary", min(col("salary")).over(emp_sorted))
 emp_3.show()
 
+
 --------------------------------------
 # rownum/denserank/rank/lead/lag
 
@@ -203,7 +204,34 @@ emp_1 = emp.withColumn('rank',rank().over(window_func))
 
 ============================       revision day                   =========================================
 
+# repartitiong/ colasec 
 
+* repartition(n) is used for both increasing or decreasing partitions, and it triggers a shuffle.
+* coalesce(n) is best for reducing partitions without a shuffle, as it minimizes computation cost.
+
+emp_partitioned = emp.repartition(10)
+emp.rdd.getnumpartitions()
+
+ emp_partitioned = emp.repartition(10,"deptid")
+ emp.rdd.getnumpartitions()
+
+ # coalesc
+
+ emp_partitioned = emp.coalesce(4)
+ emp.rdd.getnumpartitions()
+
+# to see parition infor
+
+from pyspark.sql.functions import spark_partition_id
+
+emp1 = emp.withColumn("repartition",spark_partition_id())
+emp1.show()
+
+# to segegrate into same num
+from pyspark.sql.functions import spark_partition_id
+
+emp1 = emp.repartition(4,"departmentid").withColumn("repartition",spark_partition_id())
+emp1.show()
  
  
 
