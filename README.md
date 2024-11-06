@@ -233,7 +233,16 @@ from pyspark.sql.functions import spark_partition_id
 emp1 = emp.repartition(4,"departmentid").withColumn("repartition",spark_partition_id())
 emp1.show()
  
- 
+ # joins 
+
+ emp_joined = emp.join(dept, how= "inner", on= emp.department_id == dept.department_id)
+ emp_joined.show()
+ emp_joined.select("e.dep_name","d.salary").show()
+
+
+ emp_joined = emp.alias("e")join(dept.alias("d"), how= "left", on= emp.department_id == dept.department_id)
+ emp_joined.show()
+ emp_joined.select("e.dep_name","d.salary").show()
 
 
 
