@@ -244,7 +244,7 @@ emp1.show()
  emp_joined.show()
  emp_joined.select("e.dep_name","d.salary").show()
 
-# CHP - 7 (performance utilization)
+
 
 
 
