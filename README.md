@@ -203,7 +203,7 @@ emp_1 = emp.withColumn('denserank',denserank().over(window_func))
 emp_1 = emp.withColumn('rank',rank().over(window_func))
 
 ============================       revision day                   =========================================
-
+CHP - 6
 # repartitiong/ colasec 
 
 * repartition(n) is used for both increasing or decreasing partitions, and it triggers a shuffle.
@@ -243,6 +243,9 @@ emp1.show()
  emp_joined = emp.alias("e")join(dept.alias("d"), how= "left", on= emp.department_id == dept.department_id)
  emp_joined.show()
  emp_joined.select("e.dep_name","d.salary").show()
+
+# CHP - 7 (performance utilization)
+
 
 
 
