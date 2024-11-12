@@ -246,33 +246,35 @@ emp1.show()
 
 # cluster & deployment 
 
+The driver tells the cluster manager what needs to be done.
+The cluster manager assigns workers to carry out the tasks.
+The worker nodes execute the tasks, and the driver gathers the results.
 
 
+# CLUSTER TYPES
+1. STANDALONE - LOCAL USE
+2. HADDOOP - BIG DATA 
+3. MESOS - MULTIPLE 
+4. KUBERNETER - CLOUD
 
+# CLUSTER DEPLOYMNT TYPES
+1. CLIENT NODE - CLIENT LAPTOP/USE FOR SAVE AND DEVELP TESTING
+2. CLUSTER NODE - CLUSTER ITSELF / USE FOR PRODUCTION ENVT
 
+# CLUSTER MODES 
+STANDARAD  - SINGLE PERSON
+HIGH CONCURENCY - TEAM WORK
+SINGLE MODE  - DRIVER NODE ONLY THERE NO WORKER NODE
 
+# DEPLOYMENT 
 
+# Configuring the Cluster: Deciding where your code will run—this could be on a cluster that’s managed by Spark itself, or by systems like YARN (in Hadoop) or Kubernetes. You’re setting up the infrastructure so it can handle the workload.
 
+# Submitting Jobs: After setting up, you send your PySpark job (your code) to the cluster to execute. This is called submitting a job—just like assigning a task to a team.
 
+# Scheduling and Monitoring: Once the job is running on the cluster, you’ll set it up to run at specific times if needed (like every day or every week). You also keep an eye on the job to make sure it runs smoothly, without errors.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+======================================
 # CATCHE & PERSIST 
 
 - cache and persist are used to save a DataFrame or RDD in memory so that if you need to use it multiple times, you don't have to re-compute it from scratch.
