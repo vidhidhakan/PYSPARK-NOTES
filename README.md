@@ -300,4 +300,5 @@ The data is too large for memory, so you want to save some on disk as well.
 from pyspark import StorageLevel
 df_1= df.persist(StorageLevel.MEMORY_AND_DISK)
 
+df_1.unpersist() == to clear save data 
 
