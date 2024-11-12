@@ -254,3 +254,50 @@ emp1.show()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# CATCHE & PERSIST 
+
+- cache and persist are used to save a DataFrame or RDD in memory so that if you need to use it multiple times, you don't have to re-compute it from scratch.
+
+- What it does: When you use cache(), Spark saves the DataFrame/RDD in memory (RAM).
+
+- When to use: If you need to use the same data several times in a program, caching helps because Spark doesn’t have to load or process it repeatedly.
+
+- How to use: Simply call df.cache() on your DataFrame.
+
+df_1 = df.cache()
+df_1.count()  # First time, it loads and caches
+df_1.show()   # Second time, it uses the cached data
+
+
+# PERSIST (IN MEMORY + DISK + MORE/ BOTH)
+
+What it does: persist() is more flexible. You can choose to store the data in memory, on disk, or both.
+
+When to use: Use persist() if:
+
+The data is too large for memory, so you want to save some on disk as well.
+
+# SYNTAX 
+from pyspark import StorageLevel
+df_1= df.persist(StorageLevel.MEMORY_AND_DISK)
+
+
