@@ -250,7 +250,6 @@ The driver tells the cluster manager what needs to be done.
 The cluster manager assigns workers to carry out the tasks.
 The worker nodes execute the tasks, and the driver gathers the results.
 
-
 # CLUSTER TYPES
 1. STANDALONE - LOCAL USE
 2. HADDOOP - BIG DATA 
@@ -304,3 +303,4 @@ df_1= df.persist(StorageLevel.MEMORY_AND_DISK)
 
 df_1.unpersist() == to clear save data 
 
+# ERROR HANDLING 
