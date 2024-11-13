@@ -319,5 +319,13 @@ df = spark.read \
     .option("badRecordsPath", "path/to/save/bad/records") \ 
     .csv("data.csv") 
 
+# joins and bucketing 
+
+BIG V/S SMALL TABLE
+
+
+BIG V/C BIG TABLE
+
+
 
 
