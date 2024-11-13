@@ -304,3 +304,20 @@ df_1= df.persist(StorageLevel.MEMORY_AND_DISK)
 df_1.unpersist() == to clear save data 
 
 # ERROR HANDLING 
+----------------------------- 3 METHODS ---------------------
+MODE OPTION
+
+1. PERMISSIVE- BAD RECORDS WILL BE IGNORE AND NULL WILL BE REPLACED 
+2. DROPMALFORMED - IT WILL DROP VALUES INSTEAD OF NULL
+3. FAILFAST - IT WILL THROW AN ERROR 
+
+# SYNTAX 
+df = spark.read.option("mode", "PERMISSIVE").csv("data.csv") 
+
+# BAD RECORD PATH -- THIS IS USEFUL WHEN I NEED TO MAKE ONE SEPARATE FOLDER WHICH HOLDS ONLY BAD RECORDS
+df = spark.read \ 
+    .option("badRecordsPath", "path/to/save/bad/records") \ 
+    .csv("data.csv") 
+
+
+
