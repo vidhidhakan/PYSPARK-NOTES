@@ -348,11 +348,12 @@ result = df1.join(broadcast(df2), on="join_column", how="inner")
 WHEN U WANT TO JOIN LARGE TABLES
 FASTER FLITERING
 FASTER AGGREGATIONS 
+SAME COLUMN AND ROWS TO MAKE JOINS
 
 # SYNTAX FOR BUCKETING
 
 1.WRITE - 
-Sales.write.format("csv).bucketBy(4,"city_id").option("header",true).option(path).saveasTable("bucketTABLE") 
+   Sales.write.format("csv).bucketBy(4,"city_id").option("header",true).option(path).saveasTable("bucketTABLE") 
 
 2. READ-
     bucketed_df =spark.read.table("bucketed_table")
@@ -360,11 +361,7 @@ Sales.write.format("csv).bucketBy(4,"city_id").option("header",true).option(path
 3. JOIN
    emp_joined = emp.join(dept, on= emp.department_id == dept.department_id, how = "inner") 
 
-# Key Points to Remember 
 
-Bucketing requires that both tables are bucketed on the same column and have the same number of buckets for efficient joins. 
-
-===============================================
 
 
 
