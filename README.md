@@ -318,13 +318,15 @@ df = spark.read.option("mode", "PERMISSIVE").csv("data.csv")
 df = spark.read \ 
     .option("badRecordsPath", "path/to/save/bad/records") \ 
     .csv("data.csv") 
+    
+# CHP 10 JOINS AND BUCKETING
 
-# joins and bucketing 
+1. SORT MERGE JOIN
+2. HASH SHUFFLE JOIN
+3. BROAD CAST JOIN
 
-BIG V/S SMALL TABLE
+# WHEN TO USE JOINS AND POINT TO REMEMBER 
 
-
-BIG V/C BIG TABLE
 
 
 
