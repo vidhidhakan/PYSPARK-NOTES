@@ -318,12 +318,25 @@ df = spark.read.option("mode", "PERMISSIVE").csv("data.csv")
 df = spark.read \ 
     .option("badRecordsPath", "path/to/save/bad/records") \ 
     .csv("data.csv") 
+
+    ===============================================================================================================
     
 # CHP 10 JOINS AND BUCKETING
 
 1. SORT MERGE JOIN -- ONLY SORTING /MERGING /SHUFFLING IS THER ---- USE FOR LARGE TABLES 
 2. HASH SHUFFLE JOIN --ONLY SHUFFLING IS THER  / NO SORT NO MERGE --- USE FOR MEDIUM TABLE 
 3. BROAD CAST JOIN -- NO SHUFFLING --- USE FOR SMALL TABLE
+
+# SYNTAX FOR ALL THREE JOINS 
+
+SORT MERGE JOIN
+result = df1.join(df2, on="join_column", how="inner")
+
+HASH SHUFFLE JOIN 
+result = df1.join(df2, on="join_column", how="inner")
+
+BROADCAST JOIN 
+result = df1.join(broadcast(df2), on="join_column", how="inner")
 
 # WHAT IS BUCKETING 
 
@@ -338,15 +351,20 @@ FASTER AGGREGATIONS
 
 # SYNTAX FOR BUCKETING
 
-1.WRITE
-2. READ
-3. JOIN 
+1.WRITE - 
+Sales.write.format("csv).bucketBy(4,"city_id").option("header",true).option(path).saveasTable("bucketTABLE") 
+
+2. READ-
+    bucketed_df =spark.read.table("bucketed_table")
+   
+3. JOIN
+   emp_joined = emp.join(dept, on= emp.department_id == dept.department_id, how = "inner") 
 
 # Key Points to Remember 
 
 Bucketing requires that both tables are bucketed on the same column and have the same number of buckets for efficient joins. 
 
-
+===============================================
 
 
 
