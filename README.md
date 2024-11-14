@@ -321,11 +321,31 @@ df = spark.read \
     
 # CHP 10 JOINS AND BUCKETING
 
-1. SORT MERGE JOIN
-2. HASH SHUFFLE JOIN
-3. BROAD CAST JOIN
+1. SORT MERGE JOIN -- ONLY SORTING /MERGING /SHUFFLING IS THER ---- USE FOR LARGE TABLES 
+2. HASH SHUFFLE JOIN --ONLY SHUFFLING IS THER  / NO SORT NO MERGE --- USE FOR MEDIUM TABLE 
+3. BROAD CAST JOIN -- NO SHUFFLING --- USE FOR SMALL TABLE
 
-# WHEN TO USE JOINS AND POINT TO REMEMBER 
+# WHAT IS BUCKETING 
+
+1. PySpark will distribute the data into a fixed number of bucket
+
+2. You specify the number of buckets you want the data to be divided into. Data rows with the same bucket key value will go into the same bucket. 
+
+# Bucketing is beneficial when: 
+WHEN U WANT TO JOIN LARGE TABLES
+FASTER FLITERING
+FASTER AGGREGATIONS 
+
+# SYNTAX FOR BUCKETING
+
+1.WRITE
+2. READ
+3. JOIN 
+
+# Key Points to Remember 
+
+Bucketing requires that both tables are bucketed on the same column and have the same number of buckets for efficient joins. 
+
 
 
 
