@@ -351,16 +351,35 @@ FASTER AGGREGATIONS
 SAME COLUMN AND ROWS TO MAKE JOINS
 
 # SYNTAX FOR BUCKETING
-
 1.WRITE - 
    Sales.write.format("csv).bucketBy(4,"city_id").option("header",true).option(path).saveasTable("bucketTABLE") 
 
 2. READ-
     bucketed_df =spark.read.table("bucketed_table")
-   
-3. JOIN
-   emp_joined = emp.join(dept, on= emp.department_id == dept.department_id, how = "inner") 
 
+3. JOIN
+   emp_joined = emp.join(dept, on= emp.department_id == dept.department_id, how = "inner")
+
+#  CHP 11 (PERFORMANCE TUNING )
+         Caching and Persistence: Understand when to cache or persist data to avoid recomputation and speed up data processing. 
+
+Broadcast Joins: Learn to use broadcast joins for small tables in large-to-small joins to avoid shuffles and improve performance. 
+
+Shuffle Optimization: Understand how to reduce shuffle operations with techniques like partitioning, coalescing, and controlling parallelism. 
+
+Optimizing Partitions: Learn to manage data partitioning and repartitioning for balanced data processing and minimal shuffles. 
+
+Spark Configurations: Get familiar with tuning Spark configurations, like executor memory, cores, and shuffle settings. 
+
+Bucketing: Use bucketing to pre-sort and organize data for optimized joins and aggregations. 
+
+Window Functions: Understand when to apply window functions to reduce unnecessary shuffling. 
+
+Avoiding Skewed Data: Learn techniques to handle skewed data distributions to prevent slow processing on certain nodes. 
+
+Efficient File Formats: Use efficient file formats like Parquet for better I/O performance. 
+
+ 
 
 
 
